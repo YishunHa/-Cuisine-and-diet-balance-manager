@@ -1,0 +1,74 @@
+
+.header {
+    text-align: center;
+               margin:0;
+               width:100%; 
+    background-color: #333;
+    overflow: hidden;
+     float: left;
+    left :0;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    height:35px;
+   padding: 12px 0;
+    text-decoration: none;
+    font-size: 24px;
+    position: fixed;
+               top: 0;
+    font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3";
+    
+    
+    
+}
+.header1{
+    text-align: center;
+               margin:0;
+               width:100%; 
+    background-color: #333;
+    overflow: hidden;
+     float: left;
+    left :0;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    height:35px;
+   padding: 12px 0;
+    text-decoration: none;
+    font-size: 24px;
+    position: relative;
+               top: 0;
+    font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3";
+    
+}
+
+.icon-bar {
+        width: 100%;
+    height:70px;
+        background-color: #555;
+    float: left;
+    left :0;
+        overflow: auto;
+        position: fixed; /* Set the navbar to fixed position */
+        bottom: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+       
+    }
+
+    .icon-bar a {
+        float: left;
+        width: 25%;
+        text-align: center;
+        padding: 12px 0;
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 36px;
+    }
+
+    .icon-bar a:hover {
+        background-color: #000;
+    }
+
+    .active {
+        background-color: #4CAF50 !important;
+    }

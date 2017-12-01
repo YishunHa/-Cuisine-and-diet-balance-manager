@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+      <script src="js/nearby.js"></script>
+     
+      <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+      <link rel="stylesheet" type="text/css" href="css/icon-bar.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="css/button.css">
+      
+    
+    
+    <style>
+
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+       
+  </head>
+    
+    
+  <body>
+      <h1 class="header1">Nearby Search</h1>
+      
+      
+      <input type="text" id="searchTextField" placeholder="Search" />
+   
+      <div id="map"  style="height: 60%; width: 100%;"></div>
+      <button id="myPosition" onclick="myPosition()">Find restaurants near me</button>
+           
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5Q89sT5XB5Kw9LDEVFpg9JDaiz91iOXY&libraries=places&callback=initMap" async defer></script>
+
+      
+    <div class="icon-bar">
+        
+    <a href="index.html"><i class="fa fa-cutlery"></i></a> 
+    <a class="active" href="nearby.html"><i class="fa fa-map-marker"></i></a>
+    <a href="calculate.html"><i class="fa fa-fire"></i></a>
+    <a href="register.html"><i class="fa fa-child"></i></a> 
+
+    </div>
+      
+  </body>
+</html>

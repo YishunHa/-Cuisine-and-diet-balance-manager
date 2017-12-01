@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Google place lib demo</title>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+<!--     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>-->
+<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>-->
+
+    <script src="js/home.js"></script>
+  
+        <link rel="stylesheet" type="text/css" href="css/icon-bar.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>-->
+
+      <link rel="stylesheet" href="css/home.css">
+
+  
+</head>
+
+<body>
+   
+  <div style="with:100%; height:90%;margin-top: 9px">
+          <div id="infowindow-content">
+      <span id="place-name"  class="title"></span><br>
+<!--      Place ID <span id="place-id"></span><br>-->
+      <span id="place-address"></span>
+               
+    </div>
+      <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+        <div id="map" style="height:270px;">         
+    </div>
+      
+      
+  <div class="row">
+
+       <div id="container" class="img-responsive " ></div>
+    
+    </div>
+    
+
+<!--
+    <div id="infowindow-content">
+      <span id="place-name"  class="title"></span><br>
+
+      <span id="place-address"></span>
+    </div>
+        <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+        <div id="map" style="height:300px;">         
+        </div>
+-->
+      
+      
+  </div>
+    
+     <div class="icon-bar">
+        
+    <a class="active" href="index.html"><i class="fa fa-cutlery"></i></a> 
+    <a href="nearby.html"><i class="fa fa-map-marker"></i></a>
+    <a href="calculate.html"><i class="fa fa-fire"></i></a>
+    <a href="register.html"><i class="	fa fa-child"></i></a> 
+
+    </div>
+    
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5Q89sT5XB5Kw9LDEVFpg9JDaiz91iOXY&libraries=places&callback=initMap" async defer></script>
+
+   
+
+
+
+</body>
+</html>

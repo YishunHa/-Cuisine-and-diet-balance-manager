@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+<head>
+    <title>Blank Cordova Mobile App Project Template (Lite)</title>
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+    <!-- see http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <style>
+        /* following two viewport lines are equivalent to the meta viewport statement above, needed for Windows */
+        /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html and http://dev.w3.org/csswg/css-device-adapt/ */
+        @-ms-viewport { width: 100vw ; zoom: 100% ;}  @viewport { width: 100vw ; zoom: 100% ; }
+        @-ms-viewport { user-zoom: fixed ; }           @viewport { user-zoom: fixed ; }
+    </style>
+  
+     <script src="js/backendless.js"></script>
+    <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+    <script src="js/register.js"></script>   
+    <script src="js/toast.js"></script>
+    <!-- recommended location of your JavaScript code relative to other JS files -->
+    <script src="xdk/init-dev.js"></script>      
+<!--    normalizes device and document ready events, see README for details -->
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/icon-bar.css">
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+    <script type="text/javascript" src="js/echarts-all-3.js"></script>
+<script type="text/javascript" src="js/ecStat.min.js"></script>
+<script type="text/javascript" src="js/dataTool.min.js"></script>
+<script type="text/javascript" src="js/china.js"></script>
+<script type="text/javascript" src="js/world.js"></script>
+<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/bmap.min.js"></script>
+   
+        <script>
+            function show(shown, hidden) {
+                document.getElementById(shown).style.display='block';
+                document.getElementById(hidden).style.display='none';
+                return false;
+            }
+        </script>
+    
+</head>
+
+<body onload="calltime()">
+    <div class="header">Step Count</div>
+    <h1>welcome</h1>
+ 
+    <div id="Page1" class="textbar" style="width: 460px;">
+
+        <center><h1 id="p1">0 Steps</h1></center>
+        <div id="container" style="height: 500px;width: 100%;"></div>
+        
+        </div>
+        
+        
+        
+    
+    
+    
+    
+    
+    
+    
+
+    <div class="icon-bar">
+        
+    <a href="index.html"><i class="fa fa-cutlery"></i></a> 
+    <a href="nearby.html"><i class="fa fa-map-marker"></i></a>
+    <a href="calculate.html"><i class="fa fa-fire"></i></a>
+    <a class="active" href="register.html"><i class="fa fa-child"></i></a> 
+
+    </div>
+
+</body>
+<script type="text/javascript">
+	var SHAKE_THRESHOLD = 3000;
+	var last_update = 0;
+	var x = y = z = last_x = last_y = last_z = 0;
+	var step = 0;
+	var media;
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    title: {
+        text: 'Step count summery',
+        subtext: ''
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['']
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            dataView: {readOnly: false},
+            magicType: {type: ['line', 'bar']},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    xAxis:  {
+        type: 'category',
+        boundaryGap: false,
+        data: ['Mon','Tue','Wen','Thu','Fri','Sat','Sun']
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+            formatter: '{value}'
+        }
+    },
+    series: [
+        {
+            name:'Step count',
+            type:'line',
+            data:[3000, 2000, 1500, 1300, 1200, 1300, 1000],
+            markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+            markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            }
+        },
+        
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+	function calltime() {
+		setTimeout("init()",1000);
+	}
+	
+	function init() {
+		last_update = new Date().getTime();
+		media = document.getElementById("musicBox");
+		if (window.DeviceMotionEvent) {
+			window.addEventListener('devicemotion', deviceMotionHandler, false);
+		} else {
+			var i;
+			
+			alert("Error");
+		}
+	}
+	function deviceMotionHandler(eventData) {
+		var acceleration = eventData.accelerationIncludingGravity;
+		var curTime = new Date().getTime();
+		if ((curTime - last_update) > 100) {
+			var i;
+			var diffTime = curTime - last_update;
+			last_update = curTime;
+			x = acceleration.x;
+			y = acceleration.y;
+			z = acceleration.z;
+			var speed = Math.abs(x + y + z - last_x - last_y - last_z)
+					/ diffTime * 8500;
+			if (speed > SHAKE_THRESHOLD) {
+				step=step+1;
+				document.getElementById("p1").innerHTML="Your step count:"+step;
+			}
+			last_x = x;
+			last_y = y;
+			last_z = z;
+		}
+	}
+</script>
+</html>

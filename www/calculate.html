@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="calculator" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="src/css/kontext.css">
+    <link rel="stylesheet" href="src/css/index.css">
+     <link rel="stylesheet" type="text/css" href="css/icon-bar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    
+</head>
+<body class="kontext">
+
+    <section class="layer show" id="J_index" >
+
+
+        <section class="main" style="height:70%">
+            <h1 style="background-color:#333; width:100%; color: #f2f2f2;
+            text-align: center; font-size: 24px;height:35px;padding: 12px 0;">Calorie Calculator</h1>
+            
+            <div class="weight">
+             
+                <span class="w_txt">Enter your weight：</span>
+                <input type="number" class="w_inputkg" id="J_weight" placeholder="0">
+                <span class="w_kg">（Kg）</span>
+            </div>
+            
+            <div class="sports">
+                
+                <!-- pannel -->
+                <div class="menu_pannel">
+                    <span class="m_num" id="J_itemNums">0</span>
+                    <span class="m_tit">Activity</span>
+                    <a href="javascript:;" class="add_item" id="J_addItem">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <i class="m_line"></i>
+                </div>
+                
+                <!-- item -->
+                <div class="item_list">
+                    <ul id="J_items"></ul>
+                </div>
+                
+                
+                <!-- result -->
+                <div class="result">
+                    <p class="r_txt">Burning Calories：<span class="r_num" id="J_outResult">0</span> kilogram calorie</p>
+                
+                </div>
+                
+                
+                
+            
+            </div>
+            <div id="container" style="height: 100%"></div>
+
+        </section>
+            <div class="icon-bar">
+
+                        <a href="index.html" style="padding: 10px 0;"><i class="fa fa-cutlery"></i></a> 
+                        <a href="nearby.html" style="padding: 10px 0;"><i class="fa fa-map-marker"></i></a>
+                        <a class="active" style="padding: 10px 0;" href="calculate.html"><i class="fa fa-fire"></i></a>
+                        <a style="padding: 10px 0;" href="register.html"><i class="fa fa-child"></i></a> 
+
+                    </div>
+    </section>
+
+    <section class="options layer" id="J_options">
+        <header class="o_head">
+            <a href="javascript:;" class="o_back" id="J_back">
+                <i class="fa fa-chevron-left"></i>
+                Back
+            </a>
+            <a href="javascript:;" class="o_sure" id="J_sure">
+                OK
+            </a>
+        </header>
+        <div id="J_iwrapper" class="iwrapper">
+            <ul class="options_list" id="J_selectOptions"></ul>
+        </div>
+    </section>
+<script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+var dataAxis = ['1', '2', '3', '4', '5', '6', '7', ];
+var data = [989, 1150, 1200, 1390, 1190, 1230, 1110, 1087, ];
+var yMax = 500;
+var dataShadow = [];
+
+for (var i = 0; i < data.length; i++) {
+    dataShadow.push(yMax);
+}
+
+option = {
+    title: {
+        text: 'Calorie burnt in this week',
+        subtext: ''
+    },
+    xAxis: {
+        data: dataAxis,
+        axisLabel: {
+            inside: true,
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        axisTick: {
+            show: false
+        },
+        axisLine: {
+            show: false
+        },
+        z: 10
+    },
+    yAxis: {
+        axisLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#999'
+            }
+        }
+    },
+    dataZoom: [
+        {
+            type: 'inside'
+        }
+    ],
+    series: [
+        { // For shadow
+            type: 'bar',
+            itemStyle: {
+                normal: {color: 'rgba(0,0,0,0.05)'}
+            },
+            barGap:'-100%',
+            barCategoryGap:'40%',
+            data: dataShadow,
+            animation: false
+        },
+        {
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#9DC69C'},
+                            {offset: 0.5, color: '#67AD5B'},
+                            {offset: 1, color: '#67AD5B'}
+                        ]
+                    )
+                },
+                emphasis: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#2378f7'},
+                            {offset: 0.7, color: '#2378f7'},
+                            {offset: 1, color: '#67AD5B'}
+                        ]
+                    )
+                }
+            },
+            data: data
+        }
+    ]
+};
+
+// Enable data zoom when user click bar.
+var zoomSize = 6;
+myChart.on('click', function (params) {
+    console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+    myChart.dispatchAction({
+        type: 'dataZoom',
+        startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+        endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+    });
+});;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+</body>
+<script src="src/js/zepto.js"></script>
+<script src="src/js/fastclick.js"></script>
+<script src="src/js/iscroll.js"></script>
+<script src="src/js/kontext.js"></script>
+<script src="src/js/index.js"></script>
+
+</html>
